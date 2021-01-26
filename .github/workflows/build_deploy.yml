@@ -18,7 +18,7 @@ jobs:
           githubToken: ${{ github.token }}  
           # Set an output parameter `uname` for use in subsequent steps
           run: |
-            apt install build-essential
+            apt install build-essentials librtlsdr-dev libusb-dev
             pwd
             ls -la
             ./configure
