@@ -13,7 +13,7 @@ jobs:
         id: runcmd
         with:
           arch: armv7
-          distro: buster
+          distro: stretch
           # Not required, but speeds up builds
           githubToken: ${{ github.token }}  
           # Set an output parameter `uname` for use in subsequent steps
