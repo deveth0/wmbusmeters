@@ -11,6 +11,8 @@ jobs:
         include:
           - arch: armv7
             distro: stretch
+          - arch: armv6
+            distro: stretch
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
@@ -47,6 +49,6 @@ jobs:
             cp *.deb "/artifacts/"
       - uses: actions/upload-artifact@v2
         with:
-          name: deb-release
+          name: deb-packages
           path: artifacts/*.deb
  
