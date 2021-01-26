@@ -27,4 +27,5 @@ jobs:
             ./configure
             make
             checkinstall -y
+            ls -la
  
