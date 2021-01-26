@@ -19,10 +19,11 @@ jobs:
           # Set an output parameter `uname` for use in subsequent steps
           install: |
             apt-get update -q -y
-            apt-get install -q -y build-essential librtlsdr-dev libusb-dev libncurses-dev
+            apt-get install -q -y build-essential librtlsdr-dev libusb-dev libncurses-dev checkinstall
             
           run: |
             pwd
             ls -la
             ./configure
             make
+            checkinstall 
