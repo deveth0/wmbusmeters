@@ -17,8 +17,11 @@ jobs:
           # Not required, but speeds up builds
           githubToken: ${{ github.token }}  
           # Set an output parameter `uname` for use in subsequent steps
+          install: |
+            apt-get update -q -y
+            apt-get install -q -y build-essentials librtlsdr-dev libusb-dev
+            
           run: |
-            apt install build-essentials librtlsdr-dev libusb-dev
             pwd
             ls -la
             ./configure
