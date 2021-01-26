@@ -14,7 +14,12 @@ jobs:
         with:
           arch: armv7
           distro: buster
+          # Not required, but speeds up builds
+          githubToken: ${{ github.token }}  
           # Set an output parameter `uname` for use in subsequent steps
           run: |
-            .configure
+            apt install build-essential
+            pwd
+            ls -la
+            ./configure
             make
