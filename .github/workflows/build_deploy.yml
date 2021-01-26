@@ -26,6 +26,6 @@ jobs:
             ls -la
             ./configure
             make
-            checkinstall -y
+            checkinstall -y --install=no --pkgversion 1
             ls -la
  
