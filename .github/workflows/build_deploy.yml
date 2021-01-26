@@ -49,6 +49,6 @@ jobs:
             cp *.deb "/artifacts/"
       - uses: actions/upload-artifact@v2
         with:
-          name: deb-packages
+          name: ${{ matrix.distro }}_${{ matrix.arch }}
           path: artifacts/*.deb
  
