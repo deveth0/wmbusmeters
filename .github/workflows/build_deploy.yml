@@ -6,16 +6,32 @@ jobs:
   armv7_job:
     runs-on: ubuntu-latest
     name: Build armv7
+    strategy:
+      matrix:
+        include:
+          - arch: armv7
+            distro: stretch
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
         name: Run commands
         id: runcmd
         with:
-          arch: armv7
-          distro: stretch
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
           # Not required, but speeds up builds
           githubToken: ${{ github.token }}  
+          setup: |
+            mkdir -p "${PWD}/artifacts"  
+            
+          # Mount the artifacts directory as /artifacts in the container
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
+
+          # Pass some environment variables to the container
+          env: | # YAML, but pipe character is necessary
+            artifact_name: wmbusmeters-${{ matrix.distro }}_${{ matrix.arch }}
+            
           # Set an output parameter `uname` for use in subsequent steps
           install: |
             apt-get update -q -y
@@ -28,4 +44,9 @@ jobs:
             make
             checkinstall -y --install=no --pkgversion 1
             ls -la
+            cp *.deb "/artifacts/"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: deb-release
+          path: artifacts/*.deb
  
