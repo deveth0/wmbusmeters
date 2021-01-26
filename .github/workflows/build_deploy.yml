@@ -1,0 +1,21 @@
+name: Build 
+
+on: [push, pull_request]
+
+jobs:
+  armv7_job:
+    # The host should always be Linux
+    runs-on: buster
+    name: Build on buster armv7
+    steps:
+      - uses: actions/checkout@v2.1.0
+      - uses: uraimo/run-on-arch-action@v2.0.5
+        name: Run commands
+        id: runcmd
+        with:
+          arch: armv7
+          distro: buster
+          # Set an output parameter `uname` for use in subsequent steps
+          run: |
+            .configure
+            make
