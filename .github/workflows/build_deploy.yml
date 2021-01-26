@@ -4,9 +4,8 @@ on: [push, pull_request]
 
 jobs:
   armv7_job:
-    # The host should always be Linux
-    runs-on: buster
-    name: Build on buster armv7
+    runs-on: ubuntu-latest
+    name: Build armv7
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
